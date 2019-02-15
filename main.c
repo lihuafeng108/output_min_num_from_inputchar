@@ -48,11 +48,13 @@ static int output_min_num(char const *src, int len)
     struct record result;
     fine_min_num_and_count(signers, 10, &result);
     
-    //(1) 当0出现的个数为0的时候
+    
     if( (0 == result.num) &&  (0 == result.count) )
-    {
+    {//当0出现的个数为0的时候
         struct record result_tmp;
-        fine_min_num_and_count(signers+1, 9, &result_tmp);
+        char *ptr = signers;
+        
+        fine_min_num_and_count(ptr+1, 9, &result_tmp);
         if(0 == result_tmp.count)
         {//其他某个数字也出现0个
             
@@ -77,7 +79,7 @@ int main(void)
     char input[1024] = {0};
     int slen;
     
-    scanf("%c", input);
+    scanf("%s", input);
     slen =  strlen(input);
     
     ret = output_min_num(input, slen);
